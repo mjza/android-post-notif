@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="8dp"
     android:background="@color/primary"
     android:gravity="center_vertical">
 
@@ -26,10 +29,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Title"
+        android:text=""
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
+        android:gravity="end"
         android:textColor="@android:color/white" />
 
 </LinearLayout>
