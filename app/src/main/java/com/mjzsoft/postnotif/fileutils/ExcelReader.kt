@@ -18,7 +18,7 @@ object ExcelReader {
             val column2 = row.getCell(1)?.toString() ?: ""
             val column3 = row.getCell(2)?.toString() ?: ""
 
-            dataList.add(DataModel(column1 = column1, column2 = column2, column3 = column3))
+            dataList.add(DataModel(unitNumber = column1, email = column2, telephone = column3))
         }
         inputStream?.close()
         return dataList

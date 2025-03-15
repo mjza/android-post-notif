@@ -12,17 +12,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PostNotif"
         tools:targetApi="31">
+
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.PostNotif">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Contacts Activity (Handles Emails & Telephones) -->
+        <activity
+            android:name=".ContactsActivity"
+            android:exported="true"
+            android:label="Contacts"
+            android:theme="@style/Theme.PostNotif"/>
+
+        <!-- Scans Activity -->
+        <activity
+            android:name=".ScansActivity"
+            android:exported="true"
+            android:label="Scans"
+            android:theme="@style/Theme.PostNotif"/>
+
+        <!-- Settings Activity -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="Settings"
+            android:theme="@style/Theme.PostNotif"/>
+
     </application>
 
 </manifest>

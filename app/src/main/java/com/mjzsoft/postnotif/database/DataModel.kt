@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "data_table")
 data class DataModel(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val column1: String,
-    val column2: String,
-    val column3: String
+    val unitNumber: String,
+    val email: String,
+    val telephone: String
 )

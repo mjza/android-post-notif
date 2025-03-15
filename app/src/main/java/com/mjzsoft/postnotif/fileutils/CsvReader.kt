@@ -15,7 +15,7 @@ object CsvReader {
         reader.readNext() // Skip header
         while (reader.readNext().also { line = it } != null) {
             if (line!!.size >= 3) {
-                dataList.add(DataModel(column1 = line!![0], column2 = line!![1], column3 = line!![2]))
+                dataList.add(DataModel(unitNumber = line!![0], email = line!![1], telephone = line!![2]))
             }
         }
         reader.close()
