@@ -2,6 +2,7 @@ package com.mjzsoft.postnotif
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mjzsoft.postnotif.database.AppDatabase
@@ -28,8 +29,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         database = AppDatabase.getDatabase(this)
-        binding.btnSelectFile.setOnClickListener {
-            filePickerLauncher.launch("*/*") // Opens file picker
+
+        //binding.btnSelectFile.setOnClickListener {
+          //  filePickerLauncher.launch("*/*") // Opens file picker
+        //}
+        binding.tileEmails.setOnClickListener {
+            Toast.makeText(this, "Emails Clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.tileTelephones.setOnClickListener {
+            Toast.makeText(this, "Telephones Clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.tileScans.setOnClickListener {
+            Toast.makeText(this, "Scans Clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.tileSettings.setOnClickListener {
+            Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -44,4 +61,5 @@ class MainActivity : AppCompatActivity() {
             dataList.forEach { database.dataDao().insert(it) }
         }
     }
+
 }
