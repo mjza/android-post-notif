@@ -5,16 +5,8 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Page Title -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Contacts"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="8dp" />
+    <!-- Include Header -->
+    <include layout="@layout/header_layout"/>
 
     <!-- Scrollable Table -->
     <androidx.recyclerview.widget.RecyclerView

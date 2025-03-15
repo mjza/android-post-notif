@@ -2,6 +2,8 @@ package com.mjzsoft.postnotif
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -30,7 +32,13 @@ class ContactsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         type = intent.getStringExtra("type") ?: "Emails"
-        binding.tvTitle.text = type // Set title dynamically
+        // Set title dynamically
+        binding.root.findViewById<TextView>(R.id.tvHeaderTitle).text = type // Set title dynamically
+
+        // Back button functionality
+        binding.root.findViewById<ImageView>(R.id.btnBack).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         database = AppDatabase.getDatabase(this)
         adapter = ContactsAdapter(emptyList(), type)
