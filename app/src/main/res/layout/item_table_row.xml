@@ -2,20 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvUnit"
-        android:layout_width="0dp"
+    <!-- Row Content -->
+    <LinearLayout
+        android:id="@+id/tvRow"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tvValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tvUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Horizontal Line (Separator) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"/>
 </LinearLayout>

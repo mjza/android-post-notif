@@ -10,6 +10,7 @@ import com.mjzsoft.postnotif.database.DataModel
 class ContactsAdapter(private var dataList: List<DataModel>, private val type: String) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvUnit: TextView = view.findViewById(R.id.tvUnit)
         val tvValue: TextView = view.findViewById(R.id.tvValue)

@@ -3,9 +3,11 @@ package com.mjzsoft.postnotif
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mjzsoft.postnotif.database.AppDatabase
@@ -31,15 +33,30 @@ class ContactsActivity : AppCompatActivity() {
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set the title dynamically
         type = intent.getStringExtra("type") ?: "Emails"
-        // Set title dynamically
-        binding.root.findViewById<TextView>(R.id.tvHeaderTitle).text = type // Set title dynamically
+        binding.root.findViewById<TextView>(R.id.tvHeaderTitle).text = type
 
-        // Back button functionality
-        binding.root.findViewById<ImageView>(R.id.btnBack).setOnClickListener {
+        // Handle Back Button Click
+        val backButton = binding.root.findViewById<ImageView>(R.id.btnBack)
+        backButton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        // Set Header Row Text (Bold without background)
+        var tvRow = binding.root.findViewById<LinearLayout>(R.id.tvRow)
+        val tvUnitHeader = binding.root.findViewById<TextView>(R.id.tvUnit)
+        val tvValueHeader = binding.root.findViewById<TextView>(R.id.tvValue)
+
+        tvRow.setBackgroundColor(ContextCompat.getColor(this, R.color.light_bg))
+        tvUnitHeader.text = getString(R.string.unit)
+        tvValueHeader.text = if (type == "Emails") getString(R.string.email) else getString(R.string.phone)
+        tvUnitHeader.textSize = 18f
+        tvValueHeader.textSize = 18f
+        tvUnitHeader.setTypeface(null, android.graphics.Typeface.BOLD)
+        tvValueHeader.setTypeface(null, android.graphics.Typeface.BOLD)
+
+        // Load Database
         database = AppDatabase.getDatabase(this)
         adapter = ContactsAdapter(emptyList(), type)
 
@@ -47,14 +64,6 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
 
         loadDatabaseEntries()
-
-        binding.btnLoad.setOnClickListener {
-            filePickerLauncher.launch("*/*") // Open file picker
-        }
-
-        binding.btnClear.setOnClickListener {
-            clearDatabaseEntries()
-        }
     }
 
     private fun processFile(uri: Uri) {

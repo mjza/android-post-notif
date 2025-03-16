@@ -17,6 +17,9 @@
         android:padding="16dp"
         android:layout_marginTop="56dp"> <!-- Push content below header -->
 
+        <!-- Table Header Row (Using item_table_row.xml) -->
+        <include layout="@layout/item_table_row"/>
+
         <!-- Scrollable Table -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
