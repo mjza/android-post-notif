@@ -7,7 +7,7 @@
     <include layout="@layout/header_layout"/>
 
     <!-- Page Content (Placed Below Header) -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,6 +21,24 @@
             android:layout_height="match_parent"
             android:padding="8dp"
             android:scrollbars="vertical" />
-    </LinearLayout>
+    </RelativeLayout >
+
+    <!-- Loading Overlay (Initially Hidden) -->
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Centered Loading Spinner -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
 </FrameLayout>
