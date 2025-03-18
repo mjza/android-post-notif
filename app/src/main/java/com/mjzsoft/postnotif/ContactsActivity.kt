@@ -6,9 +6,11 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mjzsoft.postnotif.database.AppDatabase
@@ -17,6 +19,8 @@ import com.mjzsoft.postnotif.databinding.ActivityContactsBinding
 import com.mjzsoft.postnotif.fileutils.CsvReader
 import com.mjzsoft.postnotif.fileutils.ExcelReader
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 class ContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactsBinding
@@ -76,18 +80,72 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun processFile(uri: Uri) {
+        Log.i("URI", "Selected URI: $uri")
         lifecycleScope.launch {
-            val dataList: List<DataModel> = when {
-                uri.toString().endsWith(".csv") -> CsvReader.parseCsv(this@ContactsActivity, uri)
-                uri.toString().endsWith(".xls") || uri.toString().endsWith(".xlsx") -> ExcelReader.parseExcel(this@ContactsActivity, uri)
-                else -> emptyList()
-            }
-            database.dataDao().deleteAll()
-            dataList.forEach { database.dataDao().insert(it) }
-            loadDatabaseEntries()
+            try {
+                val cachedFileUri = copyFileToCache(uri)
 
+                if (cachedFileUri != null) {
+                    val dataList: List<DataModel> = when {
+                        cachedFileUri.toString().endsWith(".csv") -> CsvReader.parseCsv(this@ContactsActivity, cachedFileUri)
+                        cachedFileUri.toString().endsWith(".xls") || cachedFileUri.toString().endsWith(".xlsx") -> ExcelReader.parseExcel(this@ContactsActivity, cachedFileUri)
+                        else -> emptyList()
+                    }
+
+                    //if (dataList.size == 0){
+                    //    Toast.makeText(this.coroutineContext, "Emails Clicked", Toast.LENGTH_SHORT).show()
+                    //}
+
+                    // Clear and insert new data
+                    database.dataDao().deleteAll()
+                    dataList.forEach { database.dataDao().insert(it) }
+
+                    // Reload UI
+                    loadDatabaseEntries()
+                } else {
+                    Log.e("File Read Error", "Failed to store the file temporarily: $uri")
+                }
+            } catch (e: Exception) {
+                Log.e("File Read Error", "Error processing file: ${e.message}")
+            }
         }
     }
+
+
+    private fun copyFileToCache(uri: Uri): Uri? {
+        return try {
+            val mimeType = contentResolver.getType(uri) // Get MIME type
+            val fileExtension = getFileExtensionFromMimeType(mimeType) // Determine extension
+
+            // Create a file in the cache directory with the correct extension
+            val tempFile = File(cacheDir, "imported_file.$fileExtension")
+
+            // Copy data from InputStream to the temp file
+            val inputStream = contentResolver.openInputStream(uri)
+            val outputStream = FileOutputStream(tempFile)
+            inputStream?.copyTo(outputStream)
+            inputStream?.close()
+            outputStream.close()
+
+            // Return a valid URI using FileProvider
+            FileProvider.getUriForFile(this, "com.mjzsoft.postnotif.provider", tempFile)
+        } catch (e: Exception) {
+            Log.e("File Copy Error", "Failed to copy file: ${e.message}")
+            null
+        }
+    }
+
+
+
+    private fun getFileExtensionFromMimeType(mimeType: String?): String {
+        return when (mimeType) {
+            "text/csv" -> "csv"
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" -> "xlsx"
+            "application/vnd.ms-excel" -> "xls"
+            else -> "txt" // Default to text if unknown
+        }
+    }
+
 
     private fun loadDatabaseEntries() {
         lifecycleScope.launch {

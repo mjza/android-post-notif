@@ -7,10 +7,10 @@
       </SelectionState>
       <SelectionState runConfigName="Post Notif">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-03-18T01:39:59.132929600Z">
+        <DropdownSelection timestamp="2025-03-18T01:48:05.366651700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\mahdi\.android\avd\Medium_Phone.avd" />
+              <DeviceId pluginId="Default" identifier="serial=192.168.68.101:35231;connection=1b0158f2" />
             </handle>
           </Target>
         </DropdownSelection>

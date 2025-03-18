@@ -17,14 +17,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/tvValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@color/text_color" />
     </LinearLayout>
 
     <!-- Horizontal Line (Separator) -->
@@ -33,5 +35,5 @@
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
         android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"/>
+        android:layout_marginEnd="1dp" />
 </LinearLayout>
