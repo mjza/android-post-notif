@@ -2,6 +2,7 @@ package com.mjzsoft.postnotif
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -63,7 +64,15 @@ class ContactsActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
-        loadDatabaseEntries()
+        loadDatabaseEntries() // Load saved data
+
+        binding.btnImport.setOnClickListener {
+            filePickerLauncher.launch("*/*") // Open file picker
+        }
+
+        binding.btnClear.setOnClickListener {
+            clearDatabaseEntries()
+        }
     }
 
     private fun processFile(uri: Uri) {
@@ -76,12 +85,14 @@ class ContactsActivity : AppCompatActivity() {
             database.dataDao().deleteAll()
             dataList.forEach { database.dataDao().insert(it) }
             loadDatabaseEntries()
+
         }
     }
 
     private fun loadDatabaseEntries() {
         lifecycleScope.launch {
             val dataList = database.dataDao().getAllData()
+            Log.i("DATA", dataList.toString())
             adapter.updateData(dataList)
         }
     }

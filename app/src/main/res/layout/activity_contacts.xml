@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
         android:layout_marginTop="56dp"> <!-- Push content below header -->
 
         <!-- Table Header Row (Using item_table_row.xml) -->
@@ -28,23 +27,113 @@
             android:layout_weight="1"
             android:scrollbars="vertical" />
 
-        <!-- Buttons -->
-        <Button
-            android:id="@+id/btnLoad"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Load from CSV/Excel"
-            android:backgroundTint="@color/green"
-            android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/btnClear"
+        <!-- Footer with 4 Icons (Sticky at the bottom) -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Clear List"
-            android:backgroundTint="@color/red"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="8dp" />
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@color/primary"
+            android:layout_alignParentBottom="true"
+            android:weightSum="4">
+
+        <!-- Buttons -->
+
+        <!-- Import (Load from CSV/Excel) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btnImport"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_import"
+                android:contentDescription="Import"
+                android:clickable="true"
+                android:focusable="true" />
+            <TextView
+                android:text="Import"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Export (Export Template/Data) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btnExport"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_export"
+                android:contentDescription="Export"
+                android:clickable="true"
+                android:focusable="true" />
+            <TextView
+                android:text="Export"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Edit -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btnEdit"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="Edit"
+                android:clickable="true"
+                android:focusable="true" />
+            <TextView
+                android:text="Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Clean (Delete) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btnClear"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_delete"
+                android:contentDescription="Delete"
+                android:clickable="true"
+                android:focusable="true" />
+            <TextView
+                android:text="Clean"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     </LinearLayout>
 </FrameLayout>
